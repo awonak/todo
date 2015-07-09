@@ -1,15 +1,16 @@
 package service
 
 import (
+    "github.com/boltdb/bolt"
     "github.com/gin-gonic/gin"
 )
 
 type TodoService struct{}
 
-func (tr *TodoService) Run() {
+func (tr *TodoService) Run(db *bolt.DB) {
 
     // initialize the resource and inject our db connection
-    todoResource := &TodoResource{db: Db{}}
+    todoResource := NewTodoResource(db)
 
     router := gin.Default()
 
@@ -23,7 +24,7 @@ func (tr *TodoService) Run() {
         api.GET("/tasks", todoResource.List)
         api.POST("/tasks", todoResource.Create)
         api.GET("/tasks/:id", todoResource.Read)
-        // api.POST("/tasks/:id", todoResource.Update)
+        api.POST("/tasks/:id", todoResource.Update)
         api.DELETE("/tasks/:id", todoResource.Delete)
     }
 
