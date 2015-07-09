@@ -77,8 +77,6 @@ func (tr *TodoResource) Create(c *gin.Context) {
     var todo Todo
     c.Bind(&todo)
 
-    todo.Created = int32(time.Now().Unix())
-
     // Write to the database
     err := tr.db.Update(func(tx *bolt.Tx) error {
 
@@ -87,6 +85,7 @@ func (tr *TodoResource) Create(c *gin.Context) {
         if todo.Id == 0 {
             id, _ := b.NextSequence()
             todo.Id = id
+            todo.Created = int32(time.Now().Unix())
         }
 
         return b.Put(todo.Key(), todo.Value())
