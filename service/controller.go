@@ -15,8 +15,9 @@ func (tr *TodoService) Run(db *bolt.DB) {
     router := gin.Default()
 
     // Static files
-    // router.Static("/assets", "./assets")
-    // router.StaticFile("/favicon.ico", "./resources/favicon.ico")
+    router.Static("/assets", "./assets")
+    router.StaticFile("/favicon.ico", "./resources/favicon.ico")
+    router.StaticFile("/", "./templates/index.html")
 
     // Simple group: api
     api := router.Group("/api")
