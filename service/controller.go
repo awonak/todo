@@ -14,6 +14,18 @@ func (tr *TodoService) Run(db *bolt.DB) {
 
     router := gin.Default()
 
+    // CORS Headers
+    router.Use(func(c *gin.Context) {
+        c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+        c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type,Token")
+        c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+        c.Next()
+    })
+
+    router.OPTIONS("/*cors", func(c *gin.Context) {
+        // Empty 200 response
+    })
+
     // Static files
     router.Static("/fonts", "./client/dist/fonts")
     router.Static("/images", "./client/dist/images")
