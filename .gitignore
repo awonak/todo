@@ -6,6 +6,7 @@
 # Folders
 _obj
 _test
+.DS_Store
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -25,10 +26,11 @@ _testmain.go
 
 # Local
 *.db
+todo
 
 # front-end
-/node_modules
-/dist
-/.tmp
-/.sass-cache
-/bower_components
+client/node_modules
+client/dist
+client/.tmp
+client/.sass-cache
+client/bower_components
