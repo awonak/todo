@@ -25,3 +25,10 @@ _testmain.go
 
 # Local
 *.db
+
+# front-end
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
